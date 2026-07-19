@@ -8,10 +8,11 @@ metadata:
 spec:
   project: default
 
+  spec:
   source:
     repoURL: https://github.com/mrcaption49/KubernetesGitOpsArgoCD.git
     targetRevision: master
-    path: .
+    path: django-k8s-demo/k8s
 
   destination:
     server: https://kubernetes.default.svc
