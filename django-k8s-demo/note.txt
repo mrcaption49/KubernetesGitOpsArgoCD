@@ -5,3 +5,141 @@ WHduRENXeTBnaVFFUEQyWQ==
 
 [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WHduRENXeTBnaVFFUEQyWQ=="))
 XwnDCWy0giQEPD2Y
+
+
+
+# 1. Activate Environment
+.\venv\Scripts\activate
+
+# 2. Install Dependencies
+pip install -r requirements.txt
+
+# 3. Test Django Application
+python manage.py runserver
+
+
+# 4. Build Docker Image
+docker build -t django-demo:v1 .
+
+# Verify Docker Image
+docker images
+
+# Run Docker Container (Optional Test)
+docker run -p 8000:8000 django-demo:v1
+
+
+# 5. Start Kubernetes Cluster
+minikube start
+
+# Check Minikube
+minikube status
+
+# Check Kubernetes Node
+kubectl get nodes
+
+
+# 6. Deploy Application on Kubernetes
+
+kubectl apply -f k8s/deployment.yaml
+
+kubectl apply -f k8s/service.yaml
+
+
+# 7. Verify Kubernetes Deployment
+
+kubectl get all
+
+kubectl get pods
+
+kubectl get deployment
+
+kubectl get svc
+
+
+# 8. Access Application
+
+minikube service django-service
+
+
+# 9. Git Repository Setup
+
+git init
+
+git add .
+
+git commit -m "Initial Kubernetes setup"
+
+git remote add origin https://github.com/mrcaption49/KubernetesGitOpsArgoCD.git
+
+git push -u origin master
+
+
+# 10. Install ArgoCD
+
+kubectl create namespace argocd
+
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+
+# 11. Verify ArgoCD
+
+kubectl get pods -n argocd
+
+
+# 12. Access ArgoCD UI
+
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+
+# 13. Get ArgoCD Password
+
+kubectl get secret argocd-initial-admin-secret `
+-n argocd `
+-o jsonpath="{.data.password}" | base64 -d
+
+
+# 14. Create ArgoCD Application
+
+kubectl apply -f argocd-app.yaml
+
+
+# 15. Check ArgoCD Application
+
+kubectl get app -n argocd
+
+
+# 16. Check Application Resources
+
+kubectl get all
+
+
+# 17. GitOps Scaling Test
+
+# Update deployment.yaml:
+# replicas: 2 -> replicas: 5
+
+git add .
+
+git commit -m "Update replicas"
+
+git push
+
+
+# 18. Check ArgoCD Sync
+
+kubectl get app -n argocd
+
+
+# 19. Manual Sync (if required)
+
+kubectl patch application django-gitops `
+-n argocd `
+--type merge `
+-p '{"operation":{"sync":{}}}'
+
+
+# 20. Verify Final Deployment
+
+kubectl get deployment
+
+kubectl get pods
