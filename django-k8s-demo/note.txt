@@ -1,0 +1,7 @@
+
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}"
+WHduRENXeTBnaVFFUEQyWQ==
+
+
+[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WHduRENXeTBnaVFFUEQyWQ=="))
+XwnDCWy0giQEPD2Y
