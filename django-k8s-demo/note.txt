@@ -107,6 +107,10 @@ kubectl apply -f argocd-app.yaml
 
 kubectl get app -n argocd
 
+Username:
+admin
+Password:
+XwnDCWy0giQEPD2Y
 
 # 16. Check Application Resources
 
@@ -143,3 +147,8 @@ kubectl patch application django-gitops `
 kubectl get deployment
 
 kubectl get pods
+
+
+
+kubectl delete -f k8s/
+kubectl delete -f argocd-app.yaml
